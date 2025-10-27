@@ -1,0 +1,216 @@
+Royalfree.html
+<!-- index.html -->
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Royalfree.com – Urheberrechts-Checker für Musik</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="Royalfree.css" />
+</head>
+<body>
+  <!-- Header / Navigation -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#home" aria-label="Royalfree Startseite">
+        <!-- Simple logo mark (turntable) -->
+        <span class="logo-mark" aria-hidden="true">
+          <span class="platter"></span>
+          <span class="tonearm"></span>
+        </span>
+        <span class="brand-text">ROYALFREE<span class="dot">.COM</span></span>
+      </a>
+
+      <nav class="main-nav" aria-label="Hauptnavigation">
+        <a href="#home">Home</a>
+        <a href="#search">Suche</a>
+        <a href="#about">Über</a>
+        <a href="#login" class="btn btn-outline">Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero / Home -->
+  <section id="home" class="section hero">
+    <div class="container">
+      <h1>Finde heraus, ob ein Song noch geschützt ist.</h1>
+      <p class="lead">
+        Royalfree.com hilft dir zu prüfen, ob ein Lied bereits gemeinfrei ist
+        oder wie lange der Schutz noch besteht.
+      </p>
+
+      <!-- Global Search Form -->
+      <form id="global-search" class="search" aria-label="Songsuche">
+        <label class="visually-hidden" for="q">Song, Künstler:in oder Jahr</label>
+        <input id="q" name="q" type="search" placeholder="Song, Künstler:in oder Jahr …" required />
+        <button type="submit" class="btn">Prüfen</button>
+      </form>
+
+      <div class="quick-facts">
+        <div class="fact">
+          <strong>70 Jahre</strong>
+          <span>Regel nach Tod des Urhebers (EU)</span>
+        </div>
+        <div class="fact">
+          <strong>CSV/JSON</strong>
+          <span>Admin Uploads für Daten</span>
+        </div>
+        <div class="fact">
+          <strong>Favoriten</strong>
+          <span>für registrierte Nutzer:innen</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Results -->
+  <section id="search" class="section results">
+    <div class="container">
+      <header class="section-head">
+        <h2>Suchergebnisse</h2>
+        <div class="filters">
+          <label>
+            <span class="visually-hidden">Filter Status</span>
+            <select>
+              <option value="">Alle Status</option>
+              <option value="public-domain">Gemeinfrei</option>
+              <option value="protected">Geschützt</option>
+            </select>
+          </label>
+        </div>
+      </header>
+
+      <!-- Result list placeholder -->
+      <div class="cards" role="list" aria-live="polite">
+        <!-- Example Card -->
+        <article class="card" role="listitem">
+          <div class="card-head">
+            <h3 class="song">Beispielsong</h3>
+            <span class="badge protected">Geschützt</span>
+          </div>
+          <dl class="meta">
+            <div><dt>Urheber:in</dt><dd>Max Muster</dd></div>
+            <div><dt>Erschienen</dt><dd>1965</dd></div>
+            <div><dt>Todesjahr</dt><dd>2005</dd></div>
+            <div><dt>Schutz endet</dt><dd>31.12.2075</dd></div>
+          </dl>
+          <div class="card-actions">
+            <button class="btn btn-outline">Details</button>
+            <button class="btn btn-ghost">Zu Favoriten</button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Song Detail (static placeholder) -->
+  <section id="detail" class="section detail">
+    <div class="container">
+      <h2>Songdetails</h2>
+      <div class="detail-grid">
+        <div class="detail-main">
+          <h3>Beispielsong (1965)</h3>
+          <p>Urheber: Max Muster († 2005)</p>
+          <p>Schutzdauer: 70 Jahre post mortem auctoris → voraussichtliches Schutzende: 31.12.2075.</p>
+          <div class="notice">
+            Hinweis: Keine Rechtsberatung. Bitte prüfe stets die exakten Rechtsgrundlagen und Ausnahmen.
+          </div>
+        </div>
+        <aside class="detail-side">
+          <button class="btn btn-block">Als PDF exportieren</button>
+          <button class="btn btn-outline btn-block">Zu Favoriten</button>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- User Area -->
+  <section id="login" class="section auth">
+    <div class="container auth-grid">
+      <div>
+        <h2>Login</h2>
+        <form class="form">
+          <label>E-Mail
+            <input type="email" required />
+          </label>
+          <label>Passwort
+            <input type="password" required />
+          </label>
+          <button class="btn" type="submit">Anmelden</button>
+        </form>
+      </div>
+      <div>
+        <h2>Registrieren</h2>
+        <form class="form">
+          <label>E-Mail
+            <input type="email" required />
+          </label>
+          <label>Passwort
+            <input type="password" required />
+          </label>
+          <button class="btn" type="submit">Konto erstellen</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Admin -->
+  <section id="admin" class="section admin">
+    <div class="container">
+      <h2>Adminbereich</h2>
+      <p>Nur für Admins zugänglich.</p>
+
+      <div class="upload">
+        <h3>Daten-Upload (CSV/JSON)</h3>
+        <form class="form">
+          <label>Datei auswählen
+            <input type="file" accept=".csv,.json" />
+          </label>
+          <button class="btn" type="submit">Hochladen</button>
+        </form>
+      </div>
+
+      <div class="stats">
+        <h3>Statistiken</h3>
+        <ul class="stat-list">
+          <li><strong>2.314</strong> Suchanfragen (diese Woche)</li>
+          <li><strong>421</strong> neue Nutzer:innen</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- About / Legal -->
+  <section id="about" class="section about">
+    <div class="container">
+      <h2>Über Royalfree.com</h2>
+      <p>
+        Royalfree.com ist eine Student:innenarbeit. Ziel ist es, Informationen
+        zur urheberrechtlichen Schutzdauer von Musik transparent aufzubereiten.
+      </p>
+      <p class="disclaimer">
+        <strong>Disclaimer:</strong> Diese Website bietet keine Rechtsberatung.
+        Angaben ohne Gewähr; bitte nationale Gesetze, Ausnahmen (z. B. Miturheberschaft,
+        Bearbeitungen, Tonträgerrechte) und Stichtagsregeln beachten.
+      </p>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>©️ <span id="year"></span> Royalfree.com</p>
+      <nav class="footer-nav">
+        <a href="#about">Impressum &amp; Datenschutz</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    // small helper for the current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
