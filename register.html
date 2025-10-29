@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!doctype html>
 <html lang="de">
 <head>
@@ -16,7 +15,10 @@
     <div class="container header-inner">
       <a class="brand" href="#home" aria-label="Royalfree Startseite">
         <!-- Simple logo mark (turntable) -->
-        
+        <span class="logo-mark" aria-hidden="true">
+          <span class="platter"></span>
+          <span class="tonearm"></span>
+        </span>
         <span class="brand-text">ROYALFREE<span class="dot">.COM</span></span>
       </a>
 
@@ -29,86 +31,21 @@
     </div>
   </header>
 
-  <!-- Hero / Home -->
-  <section id="home" class="section hero">
-    <div class="container">
-      <h1>Finde heraus, ob ein Song noch geschützt ist.</h1>
-      <p class="lead">
-        Royalfree.com hilft dir zu prüfen, ob ein Lied bereits gemeinfrei ist
-        oder wie lange der Schutz noch besteht.
-      </p>
-
-      <!-- Global Search Form -->
-      <form id="global-search" class="search" action="search.html" method="get" aria-label="Songsuche">
-        <label class="visually-hidden" for="q">Song, Künstler:in oder Jahr</label>
-        <input id="q" name="q" type="search" placeholder="Song, Künstler:in oder Jahr …" required />
-        <button type="submit" class="btn">Prüfen</button>
-      </form>
-
-      <div class="quick-facts">
-        <div class="fact">
-          <strong>70 Jahre</strong>
-          <span>Regel nach Tod des Urhebers (EU)</span>
-        </div>
-        <div class="fact">
-          <strong>CSV/JSON</strong>
-          <span>Admin Uploads für Daten</span>
-        </div>
-        <div class="fact">
-          <strong>Favoriten</strong>
-          <span>für registrierte Nutzer:innen</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- User Login Area -->
-  <section id="login" class="section auth">
+  <!-- Register Area -->
+  <section id="register" class="section auth">
   <div class="container login-box">
-    <h2>Login</h2>
-    <form class="form" action="login.php" method="post">
+    <h2>Registrieren</h2>
+    <form class="form" action="register.php" method="post">
       <label>E-Mail
         <input type="email" name="email" required />
       </label>
       <label>Passwort
         <input type="password" name="password" required />
       </label>
-      <button class="btn" type="submit">Anmelden</button>
+      <button class="btn" type="submit">Konto erstellen</button>
     </form>
-
-    <p style="margin-top:1rem;text-align:center">
-      Noch kein Konto?
-      <a href="register.html" class="btn-ghost">Jetzt registrieren</a>
-    </p>
   </div>
 </section>
-
-
-  <!-- Admin -->
-  <section id="admin" class="section admin">
-    <div class="container">
-      <h2>Adminbereich</h2>
-      <p>Nur für Admins zugänglich.</p>
-
-      <div class="upload">
-        <h3>Daten-Upload (CSV/JSON)</h3>
-        <form class="form">
-          <label>Datei auswählen
-            <input type="file" accept=".csv,.json" />
-          </label>
-          <button class="btn" type="submit">Hochladen</button>
-        </form>
-      </div>
-
-      <div class="stats">
-        <h3>Statistiken</h3>
-        <ul class="stat-list">
-          <li><strong>2.314</strong> Suchanfragen (diese Woche)</li>
-          <li><strong>421</strong> neue Nutzer:innen</li>
-        </ul>
-      </div>
-    </div>
-  </section>
 
   <!-- About / Legal -->
   <section id="about" class="section about">
