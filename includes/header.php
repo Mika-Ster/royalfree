@@ -25,7 +25,10 @@
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item"><a class="nav-link" href="search.php">Suche</a></li>
         <?php if (currentUser()): ?>
-          <?php if (isAdmin()): ?><li class="nav-item"><a class="nav-link" href="admin.php">Admin</a></li><?php endif; ?>
+          <?php if (isAdmin()): ?>
+            <li class="nav-item"><a class="nav-link" href="admin.php">Admin</a></li>
+            <li class="nav-item"><a class="nav-link" href="upload.php">Upload</a></li>
+          <?php endif; ?>
           <li class="nav-item"><a class="nav-link" href="logout.php">Logout</a></li>
         <?php else: ?>
           <li class="nav-item"><a class="btn btn-outline-primary ms-lg-2" href="login.php">Login</a></li>
