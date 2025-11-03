@@ -1,5 +1,5 @@
 <?php include 'includes/header.php'; ?>
-<section class="hero">
+<section>
   <div class="container">
     <div class="row align-items-center g-4">
       <div class="col-lg-8">
@@ -9,7 +9,7 @@
           <div class="col-sm-9"><input name="q" type="search" class="form-control form-control-lg" placeholder="z. B. »Die Forelle«" required></div>
           <div class="col-sm-3 d-grid"><button class="btn btn-primary btn-lg">Suchen</button></div>
         </form>
-        <p class="small text-muted mt-2">Faustregel: EU-weit 70 Jahre post mortem auctoris. Details folgen auf der Recht-Seite.</p>
+        <p class="small text-muted mt-2">Faustregel: EU-weit 70 Jahre post mortem auctoris. Details folgen auf der Recht-Seite. </p>
       </div>
     </div>
   </div>

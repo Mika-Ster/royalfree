@@ -1,4 +1,4 @@
-<?php require_once __DIR__.'/auth.php'; ?>
+<?php require_once "includes/auth.php"; ?>
 <!doctype html>
 <html lang="de">
 <head>
@@ -11,7 +11,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
+<body class="hero d-flex flex-column min-vh-100">
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
   <div class="container">
     <a class="navbar-brand d-flex align-items-center gap-2" href="index.php">
@@ -37,4 +37,4 @@
     </div>
   </div>
 </nav>
-<main class="container">
+<main class="flex-fill container">
