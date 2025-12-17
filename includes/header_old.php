@@ -1,7 +1,4 @@
-<?php
-if (session_status() === PHP_SESSION_NONE) session_start();
-require_once __DIR__ . '/auth.php';
-?>
+<?php require_once "includes/auth.php"; ?>
 <!doctype html>
 <html lang="de">
 <head>
@@ -26,18 +23,15 @@ require_once __DIR__ . '/auth.php';
     </button>
     <div class="collapse navbar-collapse" id="navbarsMain">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="search.php">Suche</a></li>
-        <?php if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in']): ?>
-          <li class="nav-item"><a class="nav-link" href="upload.php">CSV Upload</a></li>
-          <li class="nav-item ms-2"><a class="btn btn-warning" href="admin_logout.php">Logout (Admin)</a></li>
-        <?php elseif (currentUser()): ?>
-          <?php $__u = currentUser(); ?>
-          <li class="nav-item d-flex align-items-center ms-3"><span class="small text-muted">Eingeloggt als <strong><?php echo htmlspecialchars($__u['displayname'] ?? $__u['email']); ?></strong></span></li>
-          <li class="nav-item ms-2"><a class="btn btn-warning" href="logout.php">Logout</a></li>
+        <?php if (currentUser()): ?>
+          <?php if (isAdmin()): ?>
+            <li class="nav-item"><a class="nav-link" href="admin.php">Admin</a></li>
+            <li class="nav-item"><a class="nav-link" href="upload.php">Upload</a></li>
+          <?php endif; ?>
+          <li class="nav-item"><a class="nav-link" href="logout.php">Logout</a></li>
         <?php else: ?>
           <li class="nav-item"><a class="btn btn-outline-primary ms-lg-2" href="login.php">Login</a></li>
-          <li class="nav-item"><a class="nav-link" href="register.php">Registrieren</a></li>
         <?php endif; ?>
       </ul>
     </div>

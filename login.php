@@ -1,30 +1,29 @@
-<?php
-require_once 'includes/auth.php';
-
-$error = null;
+<?php include 'includes/header.php'; include 'includes/auth.php'; $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $email = trim($_POST['email'] ?? '');
-  $pw = $_POST['password'] ?? '';
-  if (login($email, $pw)) {
-    header('Location: index.php'); exit;
-  } else {
-    $error = "Login fehlgeschlagen.";
-  }
-}
-include 'includes/header.php';
-?>
-<div class="container py-5" style="max-width:540px;">
-  <div class="card border-0 shadow-sm">
-    <div class="card-body p-4">
-      <h1 class="h4 text-center mb-3">Login</h1>
-      <?php if ($error): ?><div class="alert alert-danger"><?php echo htmlspecialchars($error); ?></div><?php endif; ?>
-      <form method="post">
-        <div class="mb-3"><label class="form-label">E-Mail</label><input name="email" type="email" class="form-control" required></div>
-        <div class="mb-3"><label class="form-label">Passwort</label><input name="password" type="password" class="form-control" required></div>
-        <div class="d-grid"><button class="btn btn-primary" type="submit">Anmelden</button></div>
-      </form>
-      <div class="text-center mt-3">Noch kein Benutzerkonto? <a href="register.php">Jetzt registrieren</a></div>
-    </div>
+    $email = trim($_POST['email'] ?? '');
+    $pw = trim($_POST['password'] ?? '');
+    if (login($email, $pw)) { header('Location: index.php'); exit(); }
+    else { $error = 'Ungültige Anmeldedaten.'; }
+} ?>
+<h2>Login</h2>
+<form method="post" class="card card-body shadow-sm">
+  <div class="mb-3">
+    <label class="form-label" for="email">E-Mail</label>
+    <input type="email" name="email" id="email" class="form-control" required>
   </div>
-</div>
+  <div class="mb-3">
+    <label class="form-label" for="password">Passwort</label>
+    <input type="password" name="password" id="password" class="form-control" required>
+  </div>
+  <div class="mb-3 form-check">
+    <input type="checkbox" class="form-check-input" id="remember" name="remember">
+    <label class="form-check-label" for="remember">Remember Me</label>
+  </div>
+  <div class="d-flex gap-2">
+    <button type="submit" class="btn btn-primary">Login</button>
+    <a href="register.php" class="btn btn-outline-primary">Registrieren</a>
+    <a href="index.php" class="btn btn-outline-secondary">Zurück</a>
+  </div>
+  <?php if ($error) echo "<div class='alert alert-danger mt-3'>$error</div>"; ?>
+</form>
 <?php include 'includes/footer.php'; ?>

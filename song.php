@@ -42,7 +42,7 @@ if (!$song) { echo '<div class="alert alert-warning">Song nicht gefunden.</div>'
     <div class="card border-0">
       <div class="card-body">
         <h2 class="h5 mb-3">Änderung vorschlagen</h2>
-        <?php if (!currentUser()): ?>
+        <?php if (!isset($_SESSION['user'])): ?>
           <div class="alert alert-warning mb-3">Bitte einloggen, um Vorschläge zu senden.</div>
           <a class="btn btn-primary" href="login.php">Zum Login</a>
         <?php else: ?>

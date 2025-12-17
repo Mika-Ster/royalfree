@@ -14,8 +14,15 @@ if ($song_id <= 0 || $text === '') {
 }
 
 
+// Ensure suggestions array exists
+if (!isset($_SESSION['suggestions']) || !is_array($_SESSION['suggestions'])) {
+  $_SESSION['suggestions'] = [];
+}
+
+$nextId = count($_SESSION['suggestions']) + 1;
+
 $_SESSION['suggestions'][] = [
-  'id' => count($_SESSION['suggestions']) + 1,
+  'id' => $nextId,
   'user_id' => $user['id'],
   'song_id' => $song_id,
   'text' => $text,

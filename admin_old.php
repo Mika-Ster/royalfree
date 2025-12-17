@@ -1,16 +1,9 @@
-<?php include 'includes/header.php';
-if (!isset($_SESSION['admin_logged_in']) ||
-    $_SESSION['user_agent'] !== $_SERVER['HTTP_USER_AGENT'] ||
-    $_SESSION['ip'] !== $_SERVER['REMOTE_ADDR']) {
-    $adminUser = 'admin@technikum-wien.at';
-    if (isset($_COOKIE['remember_admin']) && $_COOKIE['remember_admin'] === hash('sha256', $adminUser)) {
-        $_SESSION['admin_logged_in'] = true;
-        $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
-        $_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
-    } else {
-        header('Location: admin_login.php'); exit();
-    }
-}
+<?php
+require_once 'includes/header.php';
+require_once 'includes/auth.php';
+requireLogin();
+if (!isAdmin()) { echo '<div class="alert alert-danger mt-3">Kein Zugriff.</div>'; include 'includes/footer.php'; exit; }
+
 $sugs = $_SESSION['suggestions'] ?? [];
 ?>
 <h1 class="h3 mb-3">Admin: Vorschläge</h1>

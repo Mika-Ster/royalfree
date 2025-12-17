@@ -1,8 +1,19 @@
 <?php
 require_once 'includes/header.php';
 require_once 'includes/auth.php';
-requireLogin();
-if (!isAdmin()) { echo '<div class="alert alert-danger mt-3">Kein Zugriff.</div>'; include 'includes/footer.php'; exit; }
+// Admin-only page: verify admin session (similar to admin.php)
+if (!isset($_SESSION['admin_logged_in']) ||
+  $_SESSION['user_agent'] !== $_SERVER['HTTP_USER_AGENT'] ||
+  $_SESSION['ip'] !== $_SERVER['REMOTE_ADDR']) {
+  $adminUser = 'admin@technikum-wien.at';
+  if (isset($_COOKIE['remember_admin']) && $_COOKIE['remember_admin'] === hash('sha256', $adminUser)) {
+    $_SESSION['admin_logged_in'] = true;
+    $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
+    $_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
+  } else {
+    header('Location: admin_login.php'); exit();
+  }
+}
 
 $uploadDir = __DIR__ . '/uploads/';
 if (!file_exists($uploadDir)) { mkdir($uploadDir, 0777, true); }

@@ -1,15 +1,4 @@
-<?php include 'includes/header.php'; include 'includes/auth.php'; $u = currentUser(); ?>
-<?php if ($u): ?>
-  <div id="login-alert" class="alert alert-success" style="transition:opacity .6s ease;">Eingeloggt als <b><?php echo htmlspecialchars($u['displayname'] ?? $u['email']); ?></b></div>
-  <script>
-    (function(){
-      // Fade out the login alert after 5 seconds
-      var el = document.getElementById('login-alert');
-      if (!el) return;
-      setTimeout(function(){ el.style.opacity = '0'; setTimeout(function(){ if (el && el.parentNode) el.parentNode.removeChild(el); }, 700); }, 5000);
-    })();
-  </script>
-<?php endif; ?>
+<?php include 'includes/header.php'; ?>
 <section>
   <div class="container">
     <div class="row align-items-center g-4">
@@ -25,5 +14,4 @@
     </div>
   </div>
 </section>
-<hr>
 <?php include 'includes/footer.php'; ?>

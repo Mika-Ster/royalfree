@@ -1,24 +1,23 @@
-<?php
-require_once 'includes/auth.php';
-
-$info = null; $error = null;
-include 'logic/registration_form';
-?>
-
-<?php include 'includes/header.php'; ?>
-<div class="container py-5" style="max-width:540px;">
-  <div class="card border-0 shadow-sm">
-    <div class="card-body p-4">
-      <h1 class="h4 text-center mb-3">Registrieren</h1>
-      <?php if ($info): ?><div class="alert alert-success"><?php echo htmlspecialchars($info); ?></div><?php endif; ?>
-      <?php if ($error): ?><div class="alert alert-danger"><?php echo htmlspecialchars($error); ?></div><?php endif; ?>
-      <form method="post">
-        <div class="mb-3"><label class="form-label">E-Mail</label><input name="email" type="email" class="form-control" required></div>
-        <div class="mb-3"><label class="form-label">Passwort</label><input name="password" type="password" class="form-control" required></div>
-        <div class="mb-3"><label class="form-label">Anzeigename</label><input name="displayname" type="text" class="form-control" required></div>
-        <div class="d-grid"><button class="btn btn-primary" type="submit">Konto anlegen</button></div>
-      </form>
-    </div>
+<?php require_once 'logic/registration_form.php'; ?>
+<h2>Registrieren</h2>
+<form method="post" class="card card-body shadow-sm">
+  <div class="mb-3">
+    <label class="form-label" for="displayname">Name</label>
+    <input type="text" name="displayname" id="displayname" class="form-control" required>
   </div>
-</div>
+  <div class="mb-3">
+    <label class="form-label" for="email">E-Mail</label>
+    <input type="email" name="email" id="email" class="form-control" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label" for="password">Passwort</label>
+    <input type="password" name="password" id="password" class="form-control" required>
+  </div>
+  <div class="d-flex gap-2">
+    <button class="btn btn-primary">Registrieren</button>
+    <a href="login.php" class="btn btn-outline-secondary">Zurück zum Login</a>
+  </div>
+  <?php if ($msg) echo "<div class='alert alert-success mt-3'>$msg</div>"; ?>
+  <?php if ($err) echo "<div class='alert alert-danger mt-3'>$err</div>"; ?>
+</form>
 <?php include 'includes/footer.php'; ?>
