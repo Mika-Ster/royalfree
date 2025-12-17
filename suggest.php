@@ -13,7 +13,7 @@ if ($song_id <= 0 || $text === '') {
   header('Location: song.php?id='.$song_id.'&sent=0'); exit;
 }
 
-// Demo: Vorschlag in Session speichern
+
 $_SESSION['suggestions'][] = [
   'id' => count($_SESSION['suggestions']) + 1,
   'user_id' => $user['id'],
