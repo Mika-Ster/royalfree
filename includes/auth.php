@@ -1,12 +1,12 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) { session_start(); }
 
-// Demo-Users in Session halten; später per DB ersetzen.
+
 if (!isset($_SESSION['users'])) {
-  $_SESSION['users'] = []; // leere Liste; erster registrierter User wird admin
+  $_SESSION['users'] = []; 
 }
 if (!isset($_SESSION['suggestions'])) {
-  $_SESSION['suggestions'] = []; // gesammelte Vorschläge
+  $_SESSION['suggestions'] = []; 
 }
 
 function currentUser() {
@@ -33,7 +33,7 @@ function findUserByEmail($email) {
 }
 
 function saveUser($user) {
-  // Aktualisieren oder anhängen
+  
   $found = false;
   foreach ($_SESSION['users'] as $i => $u) {
     if ($u['id'] === $user['id']) { $_SESSION['users'][$i] = $user; $found = true; break; }
