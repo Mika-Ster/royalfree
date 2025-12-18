@@ -1,4 +1,4 @@
-<?php include 'includes/header.php'; include 'includes/auth.php'; $u = currentUser(); ?>
+<?php include 'includes/header.php'; $u = currentUser(); ?>
 <?php if ($u): ?>
   <div id="login-alert" class="alert alert-success" style="transition:opacity .6s ease;">Eingeloggt als <b><?php echo htmlspecialchars($u['displayname'] ?? $u['email']); ?></b></div>
   <script>

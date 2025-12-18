@@ -1,6 +1,6 @@
 <?php
 require_once 'includes/header.php';
-require_once 'includes/auth.php';
+require_once 'logic/auth.php';
 // Admin-only page: verify admin session (similar to admin.php)
 if (!isset($_SESSION['admin_logged_in']) ||
   $_SESSION['user_agent'] !== $_SERVER['HTTP_USER_AGENT'] ||

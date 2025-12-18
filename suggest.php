@@ -1,5 +1,5 @@
 <?php
-require_once 'includes/auth.php';
+require_once 'logic/auth.php';
 require_once 'includes/data.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') { header('Location: index.php'); exit; }

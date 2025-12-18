@@ -1,4 +1,4 @@
-<?php require_once "includes/auth.php"; ?>
+<?php require_once __DIR__ . '/../logic/auth.php'; ?>
 <!doctype html>
 <html lang="de">
 <head>

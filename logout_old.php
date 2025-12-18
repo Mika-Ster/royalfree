@@ -1,4 +1,4 @@
 <?php
-require_once 'includes/auth.php';
+require_once 'logic/auth.php';
 logout();
 ?>
