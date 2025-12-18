@@ -1,6 +1,6 @@
 <?php
 require_once 'includes/header.php';
-require_once 'includes/auth.php';
+require_once 'logic/auth.php';
 requireLogin();
 if (!isAdmin()) { echo '<div class="alert alert-danger mt-3">Kein Zugriff.</div>'; include 'includes/footer.php'; exit; }
 

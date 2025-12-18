@@ -1,5 +1,5 @@
 <?php
-require_once 'includes/auth.php';
+require_once 'logic/auth.php';
 
 $info = null; $error = null;
 include 'logic/registration_form';

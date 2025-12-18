@@ -1,4 +1,4 @@
-<?php include 'includes/header.php'; include 'includes/auth.php'; $msg=''; $err='';
+<?php include 'includes/header.php'; $msg=''; $err='';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $e = trim($_POST['email'] ?? '');
     $p = trim($_POST['password'] ?? '');
