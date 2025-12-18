@@ -94,6 +94,20 @@ if (!function_exists('findUserByEmail')) {
     }
 }
 
+// Helper: konsistente Prüfungen für eingeloggte User/Admin
+if (!function_exists('isUserLoggedIn')) {
+    function isUserLoggedIn(): bool {
+        // Anpassbar: je nachdem, ob ihr 'user' (Array) oder 'user_logged_in' (Flag) verwendet
+        return !empty($_SESSION['user_logged_in']) || !empty($_SESSION['user']);
+    }
+}
+
+if (!function_exists('isAdminLoggedIn')) {
+    function isAdminLoggedIn(): bool {
+        return !empty($_SESSION['admin_logged_in']);
+    }
+}
+
 if (!function_exists('register')) {
     function register($email, $password, $displayname) {
         if (findUserByEmail($email)) return false;
