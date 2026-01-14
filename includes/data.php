@@ -1,25 +1,28 @@
 <?php
-// Demo-Daten, später per DB ersetzen.
-$SONGS = [
-  [
-    'id' => 1,
-    'title' => 'Die Forelle',
-    'year' => 1817,
-    'public_domain' => true,
-    'protection_until' => 'Gemeinfrei',
-    'composer' => 'Franz Schubert',
-    'lyricist' => 'Christian Friedrich Daniel Schubart',
-    'performer' => ''
-  ],
-  [
-    'id' => 2,
-    'title' => 'Imagine',
-    'year' => 1971,
-    'public_domain' => false,
-    'protection_until' => 'mind. bis 70 Jahre nach Tod (John Lennon †1980)',
-    'composer' => 'John Lennon',
-    'lyricist' => 'John Lennon',
-    'performer' => 'John Lennon'
-  ]
-];
+// Wir laden die Datenbankverbindung
+require_once __DIR__ . '/../logic/db.php';
+
+try {
+    // 1. SQL Abfrage vorbereiten
+    $stmt = $pdo->query("SELECT * FROM songs");
+    
+    // 2. Alle Ergebnisse holen
+    $rawSongs = $stmt->fetchAll();
+    
+    // 3. Typ-Anpassung (Datenbank liefert oft Strings, PHP braucht int/bool)
+    $SONGS = [];
+    foreach ($rawSongs as $row) {
+        // public_domain kommt als 0 oder 1 aus der DB, wir machen true/false draus
+        $row['public_domain'] = (bool)$row['public_domain'];
+        $row['year'] = (int)$row['year'];
+        $row['id'] = (int)$row['id'];
+        
+        $SONGS[] = $row;
+    }
+
+} catch (PDOException $e) {
+    // Fallback, falls DB crasht (damit die Seite nicht weiß bleibt)
+    $SONGS = [];
+    error_log("DB Fehler in data.php: " . $e->getMessage());
+}
 ?>
