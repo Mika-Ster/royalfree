@@ -29,6 +29,7 @@ require_once __DIR__ . '/../logic/auth.php';
         <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="search.php">Suche</a></li>
         <?php if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in']): ?>
+          <li class="nav-item"><a class="nav-link" href="admin.php">Vorschläge</a></li>
           <li class="nav-item"><a class="nav-link" href="upload.php">CSV Upload</a></li>
           <li class="nav-item ms-2"><a class="btn btn-warning" href="admin_logout.php">Logout (Admin)</a></li>
         <?php elseif (currentUser()): ?>
