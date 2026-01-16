@@ -1,6 +1,6 @@
 <?php
-require_once 'includes/header.php';
-require_once 'includes/data.php';
+require_once __DIR__ . '/includes/header.php';
+require_once __DIR__ . '/logic/data.php';
 
 $q = isset($_GET['q']) ? trim($_GET['q']) : '';
 $results = [];
@@ -57,4 +57,4 @@ if ($q !== '') {
     </tbody>
   </table>
 </div>
-<?php include 'includes/footer.php'; ?>
+<?php include __DIR__ . '/includes/footer.php'; ?>

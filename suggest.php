@@ -1,6 +1,6 @@
 <?php
-require_once 'logic/auth.php';
-require_once 'includes/data.php';
+require_once __DIR__ . '/logic/auth.php';
+require_once __DIR__ . '/logic/data.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') { header('Location: index.php'); exit; }
 if (!currentUser()) { header('Location: login.php'); exit; }
