@@ -30,7 +30,18 @@ if ($q !== '') {
         <tr><td colspan="5" class="text-center text-muted py-4">Keine Ergebnisse</td></tr>
       <?php else: foreach ($results as $s): ?>
         <tr>
-          <td><a class="text-decoration-none" href="song.php?id=<?php echo urlencode($s['id']); ?>"><?php echo htmlspecialchars($s['title']); ?></a></td>
+          <td>
+            <a class="text-decoration-none" href="song.php?id=<?php echo urlencode($s['id']); ?>"><?php echo htmlspecialchars($s['title']); ?></a>
+            <?php if (function_exists('isAdminLoggedIn') && isAdminLoggedIn()): ?>
+              <div class="mt-1 small">
+                <a href="edit_song.php?id=<?php echo urlencode($s['id']); ?>" class="link-secondary me-2">Bearbeiten</a>
+                <form method="post" action="delete_song.php" class="d-inline" onsubmit="return confirm('Song wirklich löschen?');">
+                  <input type="hidden" name="id" value="<?php echo htmlspecialchars($s['id']); ?>">
+                  <button class="btn btn-link p-0 text-danger small">Löschen</button>
+                </form>
+              </div>
+            <?php endif; ?>
+          </td>
           <td><?php echo htmlspecialchars($s['year'] ?? '—'); ?></td>
           <td>
             <?php if (!empty($s['public_domain'])): ?>
