@@ -1,5 +1,6 @@
 <?php
 require_once 'logic/auth.php';
+require_once 'logic/db.php';
 require_once 'includes/data.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') { header('Location: index.php'); exit; }
@@ -15,19 +16,14 @@ if ($song_id <= 0 || $text === '') {
 
 
 // Ensure suggestions array exists
-if (!isset($_SESSION['suggestions']) || !is_array($_SESSION['suggestions'])) {
-  $_SESSION['suggestions'] = [];
+// Insert suggestion into DB
+try {
+  $stmt = $pdo->prepare('INSERT INTO suggestions (user_id, song_id, text, created_at) VALUES (?, ?, ?, ?)');
+  $stmt->execute([(int)$user['id'], $song_id, $text, date('Y-m-d H:i:s')]);
+} catch (Exception $e) {
+  // on error, redirect with failure
+  header('Location: song.php?id='.$song_id.'&sent=0'); exit;
 }
-
-$nextId = count($_SESSION['suggestions']) + 1;
-
-$_SESSION['suggestions'][] = [
-  'id' => $nextId,
-  'user_id' => $user['id'],
-  'song_id' => $song_id,
-  'text' => $text,
-  'created_at' => date('c')
-];
 
 header('Location: song.php?id='.$song_id.'&sent=1');
 exit;
