@@ -6,8 +6,9 @@
       <div class="col-lg-8">
         <h1 class="h3 mb-3">Impressum</h1>
         <p>Website von <strong>Dominik Sommer</strong> und <strong>Michael Stermann</strong>.</p>
-        <p>Kontakt: ersetze-dies-durch-eine-echte-email@example.com</p>
-        <p class="small text-muted">Dieses Impressum enthält die Mindestangaben gemäß TMG/IMPressumspflicht. Angaben gegebenenfalls anpassen.</p>
+        <p>Royalfree.at ist eine Website von Dominik Sommer und Michael Stermann im Rahmen des Projektes Webtechnologien an der FH Technikum Wien.</p>
+        <p>Kontakt: <a href="mailto:wi24b118@technikum-wien.at">wi24b118@technikum-wien.at</a></p>
+        <p class="small text-muted">Dieses Impressum enthält die Mindestangaben. Angaben gegebenenfalls anpassen.</p>
       </div>
     </div>
   </div>
