@@ -1,4 +1,5 @@
 <?php include 'includes/header.php';
+require_once 'logic/db.php';
 if (!isset($_SESSION['admin_logged_in']) ||
     $_SESSION['user_agent'] !== $_SERVER['HTTP_USER_AGENT'] ||
     $_SESSION['ip'] !== $_SERVER['REMOTE_ADDR']) {
@@ -11,7 +12,17 @@ if (!isset($_SESSION['admin_logged_in']) ||
         header('Location: admin_login.php'); exit();
     }
 }
-$sugs = $_SESSION['suggestions'] ?? [];
+$sugs = [];
+try {
+  $query = 'SELECT s.id, s.song_id, s.user_id, s.text, s.created_at, u.displayname
+        FROM suggestions s
+        LEFT JOIN users u ON u.id = s.user_id
+        ORDER BY s.created_at DESC';
+  $stmt = $pdo->query($query);
+  $sugs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (Exception $e) {
+  $sugs = [];
+}
 ?>
 <h1 class="h3 mb-3">Admin: Vorschläge</h1>
 <?php if (empty($sugs)): ?>

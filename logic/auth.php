@@ -7,6 +7,9 @@ define('REMEMBER_TOKENS_FILE', __DIR__ . '/remember_tokens.json');
 // Load configuration (ADMIN email / password hash) from logic/config.php
 require_once __DIR__ . '/config.php';
 
+// Database connection (provides $pdo)
+require_once __DIR__ . '/db.php';
+
 // Define ADMIN constants from config variables (with safe fallback for demo)
 if (!defined('ADMIN_EMAIL')) {
     define('ADMIN_EMAIL', isset($ADMIN_EMAIL) && $ADMIN_EMAIL ? $ADMIN_EMAIL : 'admin@technikum-wien.at');
@@ -38,14 +41,10 @@ if (!isset($_SESSION['user']) && isset($_COOKIE['remember_user'])) {
     $store = read_remember_tokens();
     if (isset($store[$tokenHash]) && $store[$tokenHash]['type'] === 'user') {
         if ($store[$tokenHash]['expires'] >= time()) {
-            // find user in session store (demo) and set
-            if (isset($_SESSION['users'])) {
-                foreach ($_SESSION['users'] as $u) {
-                    if (strcasecmp($u['email'], $store[$tokenHash]['email']) === 0) {
-                        $_SESSION['user'] = $u;
-                        break;
-                    }
-                }
+            // fetch user from DB by email and set session
+            $u = findUserByEmail($store[$tokenHash]['email']);
+            if ($u) {
+                $_SESSION['user'] = $u;
             }
         } else {
             unset($store[$tokenHash]); write_remember_tokens($store);
@@ -87,10 +86,11 @@ if (!function_exists('requireLogin')) {
 
 if (!function_exists('findUserByEmail')) {
     function findUserByEmail($email) {
-        foreach ($_SESSION['users'] as $u) {
-            if (strcasecmp($u['email'], $email) === 0) return $u;
-        }
-        return null;
+        global $pdo;
+        $stmt = $pdo->prepare('SELECT id, email, password, displayname, role FROM users WHERE email = ? LIMIT 1');
+        $stmt->execute([$email]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row ? $row : null;
     }
 }
 
@@ -110,16 +110,15 @@ if (!function_exists('isAdminLoggedIn')) {
 
 if (!function_exists('register')) {
     function register($email, $password, $displayname) {
+        global $pdo;
         if (findUserByEmail($email)) return false;
-        $new = [
-            'id' => count($_SESSION['users']) + 1,
-            'email' => $email,
-            'password' => password_hash($password, PASSWORD_BCRYPT),
-            'displayname' => $displayname,
-            'role' => count($_SESSION['users']) === 0 ? 'admin' : 'user'
-        ];
-        $_SESSION['users'][] = $new;
-        return true;
+        // Determine role: first registered user becomes admin
+        $countStmt = $pdo->query('SELECT COUNT(*) AS c FROM users');
+        $count = (int)$countStmt->fetch(PDO::FETCH_ASSOC)['c'];
+        $role = ($count === 0) ? 'admin' : 'user';
+        $hash = password_hash($password, PASSWORD_BCRYPT);
+        $stmt = $pdo->prepare('INSERT INTO users (email, password, displayname, role) VALUES (?, ?, ?, ?)');
+        return $stmt->execute([$email, $hash, $displayname, $role]);
     }
 }
 
