@@ -47,7 +47,7 @@ if (!$song) { echo '<div class="alert alert-warning">Song nicht gefunden.</div>'
           <a class="btn btn-primary" href="login.php">Zum Login</a>
         <?php else: ?>
           <?php if (isset($_GET['sent']) && $_GET['sent']==='1'): ?>
-            <div class="alert alert-success">Danke. Dein Vorschlag wurde gespeichert (Demo).</div>
+            <div class="alert alert-success">Danke. Dein Vorschlag wurde gespeichert.</div>
           <?php endif; ?>
           <form action="suggest.php" method="post">
             <input type="hidden" name="song_id" value="<?php echo (int)$song['id']; ?>">
