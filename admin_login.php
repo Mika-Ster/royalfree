@@ -3,11 +3,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $u = trim($_POST['username'] ?? '');
   $p = trim($_POST['password'] ?? '');
   $rem = isset($_POST['remember']);
-  if (checkAdminCredentials($u, $p)) {
-    loginAdmin($u, $rem);
+
+  $user = null;
+  if (function_exists('findUserByEmail')) {
+    $user = findUserByEmail($u);
+  }
+  if ($user && password_verify($p, $user['password']) && (!empty($user['role']) && $user['role'] === 'admin')) {
+    loginAdmin($user['email'], $rem);
     header('Location: admin.php'); exit();
-  } else { $err = 'Falsche Admin-Daten.'; }
-} ?>
+  } else {
+    $err = 'Falsche Admin-Daten.';
+  }
+}
+?>
 <h2>Admin Login</h2>
 <form method="post" class="card card-body shadow-sm">
   <div class="mb-3">

@@ -13,14 +13,10 @@ if ($song_id <= 0 || $text === '') {
   header('Location: song.php?id='.$song_id.'&sent=0'); exit;
 }
 
-
-// Ensure suggestions array exists
-// Insert suggestion into DB
 try {
   $stmt = $pdo->prepare('INSERT INTO suggestions (user_id, song_id, text, created_at) VALUES (?, ?, ?, ?)');
   $stmt->execute([(int)$user['id'], $song_id, $text, date('Y-m-d H:i:s')]);
 } catch (Exception $e) {
-  // on error, redirect with failure
   header('Location: song.php?id='.$song_id.'&sent=0'); exit;
 }
 

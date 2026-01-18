@@ -16,6 +16,9 @@ if ($q !== '') {
 }
 ?>
 <h1 class="h3 mb-3">Suche</h1>
+<?php if (isset($_GET['deleted']) && $_GET['deleted']==='1'): ?>
+  <div class="alert alert-success">Song wurde gelöscht.</div>
+<?php endif; ?>
 <form class="row g-2" action="search.php" method="get">
   <div class="col-sm-9"><input name="q" type="search" value="<?php echo htmlspecialchars($q); ?>" class="form-control" placeholder="Suchbegriff"></div>
   <div class="col-sm-3 d-grid"><button class="btn btn-primary">Suchen</button></div>
@@ -35,7 +38,7 @@ if ($q !== '') {
             <?php if (function_exists('isAdminLoggedIn') && isAdminLoggedIn()): ?>
               <div class="mt-1 small">
                 <a href="edit_song.php?id=<?php echo urlencode($s['id']); ?>" class="link-secondary me-2">Bearbeiten</a>
-                <form method="post" action="delete_song.php" class="d-inline" onsubmit="return confirm('Song wirklich löschen?');">
+                <form method="post" action="/logic/delete_song.php" class="d-inline" onsubmit="return confirm('Song wirklich löschen?');">
                   <input type="hidden" name="id" value="<?php echo htmlspecialchars($s['id']); ?>">
                   <button class="btn btn-link p-0 text-danger small">Löschen</button>
                 </form>
