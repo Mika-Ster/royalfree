@@ -2,9 +2,7 @@
 require_once __DIR__ . '/auth.php';
 require_once __DIR__ . '/db.php';
 
-if (!function_exists('isAdminLoggedIn') || !isAdminLoggedIn()) {
-    header('Location: ../admin_login.php'); exit();
-}
+requireAdmin();
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: ../search.php'); exit();

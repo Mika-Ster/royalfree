@@ -1,5 +1,4 @@
 <?php
-// Migration script: import logic/remember_tokens.json into DB table remember_tokens
 require_once __DIR__ . '/db.php';
 
 $path = __DIR__ . '/remember_tokens.json';

@@ -1,8 +1,6 @@
 <?php include 'includes/header.php';
 require_once 'logic/db.php';
-if (!function_exists('isAdminLoggedIn') || !isAdminLoggedIn()) {
-  header('Location: admin_login.php'); exit();
-}
+requireAdmin();
 $sugs = [];
 try {
   $query = 'SELECT s.id, s.song_id, s.user_id, s.text, s.created_at, u.displayname

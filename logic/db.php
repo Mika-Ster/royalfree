@@ -1,11 +1,9 @@
 <?php
-// logic/db.php
-
 $host = 'localhost';
-$port = '8889'; // WICHTIG bei MAMP!
+$port = '8889';
 $db   = 'royalfree_db';
 $user = 'root';
-$pass = 'root'; // Standard-Passwort bei MAMP ist meist 'root'
+$pass = 'root';
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;port=$port;dbname=$db;charset=$charset";
@@ -18,7 +16,6 @@ $options = [
 try {
     $pdo = new PDO($dsn, $user, $pass, $options);
 } catch (\PDOException $e) {
-    // Bei Fehler brechen wir ab
     die("Datenbank-Verbindung fehlgeschlagen: " . $e->getMessage());
 }
 ?>

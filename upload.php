@@ -1,21 +1,17 @@
 <?php
-// 1. Setup & Abhängigkeiten laden
-require_once 'includes/header.php'; // Startet Session
-require_once 'logic/auth.php';      // Lädt Auth-Funktionen
-require_once 'logic/db.php';        // Lädt $pdo Datenbankverbindung
-require_once 'logic/import.php';    // Lädt die Import-Logik
+require_once 'includes/header.php'; 
+require_once 'logic/auth.php';     
+require_once 'logic/db.php';        
+require_once 'logic/import.php';    
 
-// 2. Sicherheitscheck (Das ist der Ersatz für den langen Block vorher)
 requireAdmin(); 
 
-// 3. Controller-Logik (Verarbeitung)
 $msg = null;
 $msgType = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['datafile'])) {
     $uploadDir = __DIR__ . '/uploads/';
     
-    // Wir rufen nur noch die Funktion auf - kein Spaghetti-Code mehr hier!
     $result = processCsvImport($_FILES['datafile'], $pdo, $uploadDir);
     
     $msg = $result['message'];
@@ -51,7 +47,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['datafile'])) {
   $dir = __DIR__ . '/uploads/';
   if (is_dir($dir)) {
       $files = array_diff(scandir($dir), ['.', '..']);
-      // Filtere versteckte Dateien und zeige sie an
       foreach ($files as $f) {
           if (strpos($f, '.') !== 0) { 
               echo '<li class="list-group-item d-flex justify-content-between align-items-center">'
