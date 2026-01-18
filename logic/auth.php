@@ -204,10 +204,9 @@ if (!function_exists('logoutAdmin')) {
 
 if (!function_exists('requireAdmin')) {
     function requireAdmin() {
-        // Wir nutzen deine existierende Funktion
         if (!isAdminLoggedIn()) {
             header('Location: admin_login.php');
-            exit(); // WICHTIG: Hier bricht das Skript ab!
+            exit();
         }
     }
 }
